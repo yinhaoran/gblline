@@ -15,43 +15,96 @@ import lombok.Data;
  * @date 2019/11/07
  */
 @Data
-@ColumnWidth(15)
+
 public class WriteResultData {
-	@ExcelProperty("运输单号")
-	private String billcode;
-	@DateTimeFormat("yyyy-MM-dd")
-	@ExcelProperty("发运时间")
-	private Date date;
-	@ExcelProperty("店代码")
-	private String storecode;
-	@ExcelProperty("店名")
-	private String storename;
-	@ExcelProperty("箱数")
-	private String cages;
-	@DateTimeFormat("yyyy-MM-dd")
-	@ExcelProperty("预计到达时间")
-	private Date expectdate;
-	@ExcelProperty("标准时效")
-	private String standard;
-	@ExcelProperty("实际时效")
-	private String actual;
-	@ExcelProperty("是否延迟")
-	private String delay;
-	@DateTimeFormat("yyyy-MM-dd")
-	@ExcelProperty("签收时间")
-	private Date signdate;
-	@ExcelProperty("订单类型")
-	private String ordertype;
-	@ExcelProperty("运输商")
-	private String carrier;
-	@ExcelProperty("省份")
-	private String province;
-	@ExcelProperty("始发地超时")
-	private String first;
-	@ExcelProperty("中转地超时")
-	private String second;
-	@ExcelProperty("目的地超时")
-	private String third;
-	@ExcelProperty("签收超时")
-	private String fourth;
+    @ColumnWidth(15)
+    @ExcelProperty("运输单号")
+    private String billcode;
+    
+    @ColumnWidth(15)
+    @DateTimeFormat("yyyy-MM-dd")
+    @ExcelProperty("发运时间")
+    private Date date;
+    
+    @ColumnWidth(15)
+    @ExcelProperty("店代码")
+    private String storecode;
+    
+    @ColumnWidth(15)
+    @ExcelProperty("店名")
+    private String storename;
+    
+    @ColumnWidth(15)
+    @ExcelProperty("箱数")
+    private String cages;
+    
+    @ColumnWidth(15)
+    @DateTimeFormat("yyyy-MM-dd")
+    @ExcelProperty("预计到达时间")
+    private Date expectdate;
+    
+    @ColumnWidth(15)
+    @ExcelProperty("标准时效")
+    private String standard;
+    
+    @ColumnWidth(15)
+    @ExcelProperty("实际时效")
+    private String actual;
+    
+    @ColumnWidth(15)
+    @ExcelProperty("是否延迟")
+    private String delay;
+    
+    @ColumnWidth(15)
+    @DateTimeFormat("yyyy-MM-dd")
+    @ExcelProperty("签收时间")
+    private Date signdate;
+    
+    /**
+     * TODO ADD BY YHR 增加【运输方式】字段
+     */
+    @ColumnWidth(15)
+    @ExcelProperty("运输方式")
+    private String transtype;
+    
+    @ColumnWidth(15)
+    @ExcelProperty("订单类型")
+    private String ordertype;
+    
+    @ColumnWidth(15)
+    @ExcelProperty("运输商")
+    private String carrier;
+
+    /**
+     * TODO ADD BY YHR 增加【中转城市】字段
+     */
+    @ColumnWidth(15)
+    @ExcelProperty("中转城市")
+    private String secondCity;
+    
+    @ColumnWidth(15)
+    @ExcelProperty("省份")
+    private String province;
+    
+    @ColumnWidth(15)
+    @ExcelProperty("始发地超时")
+    private String first;
+    
+    @ColumnWidth(15)
+    @ExcelProperty("中转地超时")
+    private String second;
+    
+    @ColumnWidth(15)
+    @ExcelProperty("目的地超时")
+    private String third;
+    
+    @ColumnWidth(15)
+    @ExcelProperty("签收超时")
+    private String fourth;
+    /**
+     * TODO ADD BY YHR 增加【超时结果】字段
+     */
+    @ColumnWidth(30)
+    @ExcelProperty("超时结果")
+    private String result;
 }

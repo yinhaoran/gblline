@@ -13,25 +13,50 @@ import lombok.Data;
  */
 @Data
 public class StanddardIndexData {
-	@ExcelProperty(index = 2)
+	/**
+	 * 店代码
+	 */
+    @ExcelProperty(index = 2)
 	private String storecode;
-	@ExcelProperty(index = 7)
+	/**
+	 * 标准时效
+	 */
+    @ExcelProperty(index = 7)
 	private String standard;
-	@ExcelProperty(index = 9)
+	/**
+	 * 运输方式
+	 */
+    @ExcelProperty(index = 8)
+	private String transtype;
+	
+    @ExcelProperty(index = 9)
 	public String time1;
-	@ExcelProperty(index = 10)
+	/**
+	 * 始发地
+	 */
+    @ExcelProperty(index = 10)
 	public String startpalce;
-	@ExcelProperty(index = 11)
+	
+    @ExcelProperty(index = 11)
 	public String time2;
-	@ExcelProperty(index = 12)
+	/**
+	 * 中转城市
+	 */
+    @ExcelProperty(index = 12)
 	public String transcity;
-	@ExcelProperty(index = 13)
+	
+    @ExcelProperty(index = 13)
 	public String time3;
-	@ExcelProperty(index = 14)
+	/**
+	 * 当前城市
+	 */
+    @ExcelProperty(index = 14)
 	public String currcity;
-	@ExcelProperty(index = 15)
+	
+    @ExcelProperty(index = 15)
 	public String time4;
-	@ExcelIgnore
+	
+    @ExcelIgnore
 	public Integer check1;
 	@ExcelIgnore
 	public Integer check2;
