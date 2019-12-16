@@ -80,8 +80,8 @@ public class EasyServiceImpl implements IEasyService {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
         String fileaddress = FileSystemView.getFileSystemView().getHomeDirectory() + "/在途预警报表" + date + ".xlsx";
-        EasyExcel.write(fileaddress, WriteResultData.class).registerWriteHandler(new GblToStoreWriteHandler()).registerWriteHandler(new SimpleColumnWidthStyleStrategy(30))
-            .sheet("在途预警报表" + date).doWrite(jsonArray);
+        EasyExcel.write(fileaddress, WriteResultData.class).registerWriteHandler(new GblToStoreWriteHandler())
+            .registerWriteHandler(new SimpleColumnWidthStyleStrategy(30)).sheet("在途预警报表" + date).doWrite(jsonArray);
         LOGGER.info("结果集大小为：{}", jsonArray.size());
     }
 
@@ -154,6 +154,11 @@ public class EasyServiceImpl implements IEasyService {
         return list;
     }
 
+    /**
+     * 将超时汇总信息拼接到json串中
+     * 
+     * @param jsonObject
+     */
     private void appendJsonObject(JSONObject jsonObject) {
         String isDelay = jsonObject.getString("first");
         StringBuffer sb = new StringBuffer();

@@ -31,7 +31,7 @@ public abstract class ParentFrame extends JPanel implements ActionListener {
 	JButton b2 = new JButton("浏览");
 	
 	JButton b3 = new JButton("开始分析");
-	JLabel label = new JLabel("消息栏");
+//	JLabel label = new JLabel("消息栏");
 	JLabel frameLabel = new JLabel("窗口标题");
 
 	@SuppressWarnings("serial")
@@ -109,16 +109,11 @@ public abstract class ParentFrame extends JPanel implements ActionListener {
 		
 		b3.setBounds(50, 210, 120, 30);// 设置组件大小和位置
 		/**
-		 * 信息栏
-		 */
-		label.setBounds(50, 250, 450, 30);
-		/**
 		 * 标题
 		 */
 		frameLabel.setBounds(50, 50, 150, 30);
 		frameLabel.setText(getFrameLabelName());
 		add(frameLabel);
-		add(label);
 		add(p1);
 		add(p2);
 		add(b1);// 加入组件

@@ -20,13 +20,29 @@ public class ExcelToJSONArray {
 
     @Test
     public void resolveExcel() {
-        String path = "C:\\Users\\yinha\\Documents\\2019-12-06\\停车需求表 测试.xlsx";
-        List<PsnInfo> list = EasyExcel.read(path, PsnInfo.class, null).sheet().doReadSync();
-        // LOGGER.info("{}", list.size());
-        JSONArray array = JSONArray.parseArray(JSON.toJSONString(list));
-        createJsonFile(array, "C:\\Users\\yinha\\Documents\\2019-12-06\\a.txt");
+        String fileName = "7-整车业务部摇号名单-38摇17";
+        String sheetName1 = "整车总-14摇6";
+        String sheetName2 = "A班-11摇5";
+        String sheetName3 = "B班-13摇6";
+        createJSFile(fileName, sheetName1);
+        createJSFile(fileName, sheetName2);
+        createJSFile(fileName, sheetName3);
+        
+//        String path = "C:\\Users\\yinha\\Documents\\2019-12-10\\各部门摇号名单\\"+fileName+".xlsx";
+//        List<PsnInfo> list = EasyExcel.read(path, PsnInfo.class, null).sheet(sheetName).doReadSync();
+//        JSONArray array = JSONArray.parseArray(JSON.toJSONString(list));
+//        createJsonFile(array, "C:\\Users\\yinha\\Documents\\2019-12-10\\工会车位排序程序\\"+fileName+"\\"+sheetName+"\\member.js");
     }
 
+    private void createJSFile(String fileName,String sheetName) {
+        String path = "C:\\Users\\yinha\\Documents\\2019-12-11\\各部门摇号名单\\"+fileName+".xlsx";
+        List<PsnInfo> list = EasyExcel.read(path, PsnInfo.class, null).sheet(sheetName).doReadSync();
+        // LOGGER.info("{}", list.size());
+        JSONArray array = JSONArray.parseArray(JSON.toJSONString(list));
+        createJsonFile(array, "C:\\Users\\yinha\\Documents\\2019-12-11\\工会车位排序程序\\"+fileName+"\\"+sheetName+"\\member.js");
+    }
+    
+    
     /**
      * 将JSON数据格式化并保存到文件中
      * 
@@ -37,7 +53,7 @@ public class ExcelToJSONArray {
      * @return
      */
     public static boolean createJsonFile(Object jsonData, String filePath) {
-        String content = JSON.toJSONString(jsonData, SerializerFeature.PrettyFormat,
+        String content ="var member = " + JSON.toJSONString(jsonData, SerializerFeature.PrettyFormat,
             SerializerFeature.WriteMapNullValue, SerializerFeature.WriteDateUseDateFormat);
         // 标记文件生成是否成功
         boolean flag = true;
