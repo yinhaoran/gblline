@@ -200,7 +200,9 @@ public class EasyServiceImpl implements IEasyService {
      */
     private void addDataToJSONObject(JSONObject jsonObject, Integer check, String place, List<String> lines,
         String key) {
-        if (check == null || check == 0) {
+        if (check == null || check == 0 
+            || "无".equals(place)
+            ) {
             return;
         }
         int index = lines.indexOf(place);
