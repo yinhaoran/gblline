@@ -128,19 +128,23 @@ public class EasyServiceImpl implements IEasyService {
             jsonObject.put("carrier", carrier);
             List<String> lines = storeIndexData.getList();
             try {
+                lines.lastIndexOf("广州");
+                lines.indexOf("广州");
+                
                 StanddardIndexData standard = mainMap.get(storecode);
                 jsonObject.put("standard", storeIndexData.getStandard());
                 jsonObject.put("transtype", standard.getTranstype());
                 jsonObject.put("secondCity", standard.getTranscity());
-                Integer check1 = standard.getCheck1();
-                String startpalce = standard.getStartpalce();
+//                Integer check1 = standard.getCheck1();
+//                String startpalce = standard.getStartpalce();
                 Integer check2 = standard.getCheck2();
                 String transcity = standard.getTranscity();
                 Integer check3 = standard.getCheck3();
                 String currcity = standard.getCurrcity();
                 Integer check4 = Integer.valueOf(storeIndexData.getStandard());
                 String sign1 = "签收";
-                addDataToJSONObject(jsonObject, check1, startpalce, lines, "first");
+//                addDataToJSONObject(jsonObject, check1, startpalce, lines, "first");
+                isStartPlaceDelay(jsonObject, lines);
                 addDataToJSONObject(jsonObject, check2, transcity, lines, "second");
                 addDataToJSONObject(jsonObject, check3, currcity, lines, "third");
                 addDataToJSONObject(jsonObject, check4, sign1, lines, "fourth");
@@ -154,14 +158,24 @@ public class EasyServiceImpl implements IEasyService {
         return list;
     }
 
+    void isStartPlaceDelay(JSONObject jsonObject,List<String> lines) {
+        int index = lines.lastIndexOf("广州");
+        if(index > 0) {
+            jsonObject.put("first", "是");
+        } else {
+            jsonObject.put("first", "否");
+        }
+    }
+    
     /**
      * 将超时汇总信息拼接到json串中
      * 
      * @param jsonObject
      */
     private void appendJsonObject(JSONObject jsonObject) {
-        String isDelay = jsonObject.getString("first");
+        String isDelay = null;
         StringBuffer sb = new StringBuffer();
+        isDelay = jsonObject.getString("first");
         if ("是".equals(isDelay)) {
             sb.append("始发地超时");
         }
@@ -200,14 +214,13 @@ public class EasyServiceImpl implements IEasyService {
      */
     private void addDataToJSONObject(JSONObject jsonObject, Integer check, String place, List<String> lines,
         String key) {
-        if (check == null || check == 0 
-            || "无".equals(place)
-            ) {
+        if (check == null || check == 0 || "无".equals(place)) {
             return;
         }
         int index = lines.indexOf(place);
         if (index == -1) {
-            jsonObject.put(key, "是");
+//            jsonObject.put(key, "是");
+            jsonObject.put(key, "否");
         } else {
             if (index <= check - 1) {
                 jsonObject.put(key, "否");

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -15,6 +17,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class ExcelToJSONArray {
     private static final Logger LOGGER = LoggerFactory.getLogger(ExcelToJSONArray.class);
 
@@ -27,22 +32,23 @@ public class ExcelToJSONArray {
         createJSFile(fileName, sheetName1);
         createJSFile(fileName, sheetName2);
         createJSFile(fileName, sheetName3);
-        
-//        String path = "C:\\Users\\yinha\\Documents\\2019-12-10\\各部门摇号名单\\"+fileName+".xlsx";
-//        List<PsnInfo> list = EasyExcel.read(path, PsnInfo.class, null).sheet(sheetName).doReadSync();
-//        JSONArray array = JSONArray.parseArray(JSON.toJSONString(list));
-//        createJsonFile(array, "C:\\Users\\yinha\\Documents\\2019-12-10\\工会车位排序程序\\"+fileName+"\\"+sheetName+"\\member.js");
+
+        // String path = "C:\\Users\\yinha\\Documents\\2019-12-10\\各部门摇号名单\\"+fileName+".xlsx";
+        // List<PsnInfo> list = EasyExcel.read(path, PsnInfo.class, null).sheet(sheetName).doReadSync();
+        // JSONArray array = JSONArray.parseArray(JSON.toJSONString(list));
+        // createJsonFile(array,
+        // "C:\\Users\\yinha\\Documents\\2019-12-10\\工会车位排序程序\\"+fileName+"\\"+sheetName+"\\member.js");
     }
 
-    private void createJSFile(String fileName,String sheetName) {
-        String path = "C:\\Users\\yinha\\Documents\\2019-12-11\\各部门摇号名单\\"+fileName+".xlsx";
+    private void createJSFile(String fileName, String sheetName) {
+        String path = "C:\\Users\\yinha\\Documents\\2019-12-11\\各部门摇号名单\\" + fileName + ".xlsx";
         List<PsnInfo> list = EasyExcel.read(path, PsnInfo.class, null).sheet(sheetName).doReadSync();
         // LOGGER.info("{}", list.size());
         JSONArray array = JSONArray.parseArray(JSON.toJSONString(list));
-        createJsonFile(array, "C:\\Users\\yinha\\Documents\\2019-12-11\\工会车位排序程序\\"+fileName+"\\"+sheetName+"\\member.js");
+        createJsonFile(array,
+            "C:\\Users\\yinha\\Documents\\2019-12-11\\工会车位排序程序\\" + fileName + "\\" + sheetName + "\\member.js");
     }
-    
-    
+
     /**
      * 将JSON数据格式化并保存到文件中
      * 
@@ -53,7 +59,7 @@ public class ExcelToJSONArray {
      * @return
      */
     public static boolean createJsonFile(Object jsonData, String filePath) {
-        String content ="var member = " + JSON.toJSONString(jsonData, SerializerFeature.PrettyFormat,
+        String content = "var member = " + JSON.toJSONString(jsonData, SerializerFeature.PrettyFormat,
             SerializerFeature.WriteMapNullValue, SerializerFeature.WriteDateUseDateFormat);
         // 标记文件生成是否成功
         boolean flag = true;
@@ -78,6 +84,12 @@ public class ExcelToJSONArray {
             e.printStackTrace();
         }
         return flag;
+    }
+
+    @Test
+    public void test() {
+        String date = new SimpleDateFormat("YYYY-MM-dd").format(new Date());
+        log.info("{}",date);
     }
 
 }
